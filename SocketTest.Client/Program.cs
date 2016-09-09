@@ -19,23 +19,22 @@ namespace SocketTest.Client
             socket.Connect(endpoint);
 
             byte[] atCommand = new byte[74];
-            atCommand[0] = 171;
-            atCommand[1] = 188;
-            atCommand[2] = 205;
+            atCommand[0] = 0xab;
+            atCommand[1] = 0xbc;
             Random r = new Random(DateTime.Now.Millisecond);
-            for(var i = 3; i < 74; i++)
+            for(var i = 2; i < 74; i++)
             {
                 atCommand[i] = (byte)(r.Next() % 256);
             }
-            socket.Send(atCommand);
+            socket.Send(atCommand);//发送长度为74  头部为ab bc的一条指令  (ab bc开的的指令固定长度为74)
 
             byte[] elec104 = new byte[10];
-            elec104[0] = 104;
-            elec104[1] = 3;
-            elec104[2] = 12;
-            elec104[3] = 12;
-            elec104[4] = 12;
-            socket.Send(elec104);
+            elec104[0] = 0x68;
+            elec104[1] = 0x03;
+            elec104[2] = 0x12;
+            elec104[3] = 0x12;
+            elec104[4] = 0x12;
+            socket.Send(elec104);//发送头部为 68 ** 的一条指令  **代表指令长度
 
             Console.ReadKey();
         }

@@ -18,7 +18,7 @@ namespace SocketTest.Server.Custom
         {
             if (header[offset] == 171)
             {
-                return 72;
+                return 74-2;
             }
             else if(header[offset]==104)
             {
