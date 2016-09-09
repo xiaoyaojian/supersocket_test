@@ -16,11 +16,11 @@ namespace SocketTest.Server.Custom
 
         protected override int GetBodyLengthFromHeader(byte[] header, int offset, int length)
         {
-            if (header[offset] == 171)
+            if (header[offset] == 0xab && header[offset] == 0xbc)
             {
-                return 74-2;
+                return 74 - 2;
             }
-            else if(header[offset]==104)
+            else if (header[offset] == 0x68)
             {
                 return header[offset + 1];
             }
